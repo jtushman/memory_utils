@@ -12,7 +12,6 @@
 import os
 import sys
 import psutil
-import logging
 from six import print_
 from colorama import Fore, Style
 
@@ -28,7 +27,7 @@ _OUT = sys.stdout
 
 _previous_memory = None
 
-_print_non_deltas = False
+_verbose = False
 
 
 class MemoryToBigException(Exception):
@@ -101,7 +100,7 @@ def print_memory(message=''):
     elif delta < 0:
         echo(Fore.GREEN + '{:<20,d} {:<20,d}{}'.format(current_rss, delta, message) + Style.RESET_ALL)
     else:
-        if _print_non_deltas:
+        if _verbose:
             echo('{:<20,d} {:<20,d}{}'.format(current_rss, delta, message) + Style.RESET_ALL)
 
     _previous_memory = current_rss
@@ -119,15 +118,16 @@ def set_memory_limit(new_memory_limit):
     _MEMORY_LIMIT = new_memory_limit
 
 
-def print_non_deltas(bool):
+def set_verbose(bool):
     """ By default :func:`print_memory` will only print statements that move the memory
-        If you want to print every call to this function set this to true::
+        and :func:`memory_watcher` will not print its memory useage
+        If you want additional verbosity set this to true::
 
             import memory_utils
-            memory_utils.print_non_deltas = True
+            memory_utils.set_verbose(True)
     """
-    global _print_non_deltas
-    _print_non_deltas = bool
+    global _verbose
+    _verbose = bool
 
 
 def set_out(io_stream):
@@ -137,7 +137,7 @@ def set_out(io_stream):
         from StringIO import StringIO
 
         out = StringIO()
-        memory_utils.set_out = out
+        memory_utils.set_out(out)
 
     """
     global _OUT
@@ -158,7 +158,7 @@ def check_memory(limit=_MEMORY_LIMIT):
         raise MemoryToBigException("{} > {} @ {}".format(sizeof_fmt(current_rss), sizeof_fmt(limit)))
 
 
-def memory_watcher(it, logging=False, limit=_MEMORY_LIMIT):
+def memory_watcher(it, limit=_MEMORY_LIMIT):
     """ Use this to wrap loops that you are concerned that might have memory issues
         In general this should be a concern in scheduled or background jobs
 
@@ -175,7 +175,7 @@ def memory_watcher(it, logging=False, limit=_MEMORY_LIMIT):
     counter = 0
     for value in it:
         counter += 1
-        if logging:
+        if _verbose:
             print_memory("[{}] {}".format(counter, value))
         check_memory(limit)
         yield value

@@ -31,6 +31,19 @@ def test_print_memory():
     assert "4,096" in out.getvalue()
 
 
+def test_memory_watch():
+
+    out = StringIO()
+    memory_utils.set_out(out)
+    memory_utils.set_verbose(True)
+
+    leak = []
+    for _ in memory_utils.memory_watcher(xrange(100 * 100)):
+        leak.append(LONGISH_STRING)
+
+    assert "4,096" in out.getvalue()
+
+
 
 
 LONGISH_STRING = """

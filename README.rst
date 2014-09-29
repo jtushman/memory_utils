@@ -26,10 +26,6 @@ Install
 
 
 
-
-
-
-
 Questions / Issues
 ------------------
 
