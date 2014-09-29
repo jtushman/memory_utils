@@ -6,16 +6,16 @@ memory_utils
 Yeah Memory Issues!!
 
 
-Memory Issues happens to the best of us.  ``memory_utils`` will give you some simple tools to help you quickly issolate
-The cuplrit.  And ideally warn you before you run into issues.
+"Memory Issues" happens to the best of us.  ``memory_utils`` will give you simple tools to quickly issolate "The" 
+cuplrit, and ideally, warn you before you run into issues.
 
-From my experience there is no silver-bullet in dealing with memory issues.  You just have roll up your sleeve and get
-dirty with print statements.  In our teams recent fight with a memory issue, we created a utility that we found useful
-and we wanted to share.
+From my experience, there is no silver-bullet in dealing with memory issues.  You just have to roll up your sleeve and get
+dirty with print statements.  In our team's recent fight with a memory issue, we created memory_utils and we wanted to 
+share.
 
-``memory_utils`` deal primarly with RSS memory (Resident Set Size)  The *resident set size* is the portion of a
-process's memory that is held in RAM.  The rest of the memory exists in swap of the file system.  This is in
-general the most important memory concept to be aware of when dealing with memory constrained systems.
+``memory_utils`` deals primarily with RSS memory (Resident Set Size).  The most important memory concept to understand 
+when dealing with memory constrained systems: RSS, the resident set size, is the portion of a process's memory that 
+is held in RAM. The rest of the memory exists in the swap of the file system.
 
 Install
 -------
@@ -30,11 +30,11 @@ Usage
 
 print_memory
 ~~~~~~~~~~~~
-The workhorse of this package is ``print_memory`` It simply prints out 3 columns of data, the current memory, the delta
-since the previous statement and an message that you pass it.  If there is an additional memory used -- the line will
-be printed RED and if there is a decrease, the line will be printed GREEN.
+The workhorse of this package is ``print_memory`` It simply prints out 3 columns of data: the current memory, the 
+delta since the previous statement and an message that you pass it.  If there is additional memory used -- 
+the line will be printed RED and if there is a decrease, the line will be printed GREEN.
 
-It is a very simple approach -- but it really helped us at glance to find out where the issue was,  The output could
+It is a very simple approach, but it really helped us  find out where the issue was, at glance.  The output could
 look like this::
 
     RSS                  Delta                Message
@@ -55,7 +55,7 @@ that help us with that
 ``check_memory``
 ^^^^^^^^^^^^^^^
 
-    Will check the current rss memory against the memory_utils set memory limit.  And if it crosses that limit it will
+    Will check the current rss memory against the memory_utils set memory limit.  If it crosses that limit it will raise
     raise a ``MemoryToBigException``
 
     .. code:: python
@@ -71,7 +71,7 @@ that help us with that
 ``memory_watcher``
 ^^^^^^^^^^^^^^^^^^
 
-    Often you will want to do your ``check_memory`` at a _safe_ place.  Also memory leak often happen within a loop.
+    Often you will want to do your ``check_memory`` at a _safe_ place.  Also memory leaks often happen within a loop.
     We created ``memory_watcher`` with those concepts in mind
     
     .. code:: python
@@ -88,7 +88,7 @@ Configuration
 ``set_verbose``
 ^^^^^^^^^^^^^^^
     By default ``print_memory`` will only print statements that move the memory
-    and ``memory_watcher`` will not print its memory useage
+    and ``memory_watcher`` will not print its memory usage.
     If you want additional verbosity set this to true
         
     .. code:: python
@@ -98,14 +98,13 @@ Configuration
 
 ``set_memory_limit``
 ^^^^^^^^^^^^^^^^^^^^
-    By default the memory limit at 200 MB
+    By default, the memory limit at 200 MB.
 
     Use this method to change the default.
 
     This setting is used in ``print_memory`` and ``memory_watcher``
 
-    Note: for all methods that deal with this limit -- you can also override it at
-    the function level as well
+    Note: you can also override this limit at the function level as well
     
     .. code:: python
 
@@ -115,7 +114,7 @@ Configuration
 ``set_out``
 ^^^^^^^^^^^
 
-    By default we will print to standard out.  Feel free to override here like so
+    By default, we will print to standard out.  Feel free to override here like so
     
     .. code:: python
 
