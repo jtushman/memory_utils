@@ -79,19 +79,21 @@ that help us with that
 Configuration
 -------------
 ``set_verbose``
-    By default :func:`print_memory` will only print statements that move the memory
-        and :func:`memory_watcher` will not print its memory useage
+^^^^^^^^^^^^^^^
+    By default ``print_memory`` will only print statements that move the memory
+        and ``memory_watcher`` will not print its memory useage
         If you want additional verbosity set this to true::
 
             import memory_utils
             memory_utils.set_verbose(True)
 
 ``set_memory_limit``
+^^^^^^^^^^^^^^^^^^^^
     By default the memory limit at 200 MB
 
     Use this method to change the default.
 
-    This setting is used in :func:`print_memory` and :func:`memory_watcher`
+    This setting is used in ``print_memory`` and ``memory_watcher``
 
     Note: for all methods that deal with this limit -- you can also override it at
     the function level as well::
@@ -100,6 +102,7 @@ Configuration
         memory_utils.set_memory_limit(500 * memory_utils.MEGABYTES)
 
 ``set_out``
+^^^^^^^^^^^
 
 By default we will print to standard out.  Feel free to override here like so::
 

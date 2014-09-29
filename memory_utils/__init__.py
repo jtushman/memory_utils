@@ -16,7 +16,11 @@ from six import print_
 from six.moves import range
 from colorama import Fore, Style
 
-MEGABTYES = MEGABTYE = 1024 * 1024
+KILOBYTE = KILOBYTES = 1024
+MEGABTYES = MEGABTYE = 1024 * KILOBYTES
+GIGABTYES = GIGABYTE = 1024 * MEGABTYES
+TERABYTES = TERABYTE = 1024 * GIGABTYES
+PETABYTES = PETABYTE = 1024 * TERABYTES
 
 
 # Note we treat this module like a singleton -- hence these following globals
