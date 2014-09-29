@@ -13,6 +13,10 @@ From my experience there is no silver-bullet in dealing with memory issues.  You
 dirty with print statements.  In our teams recent fight with a memory issue, we created a utility that we found useful
 and we wanted to share.
 
+``memory_utils`` deal primarly with RSS memory (Resident Set Size)  The *resident set size* is the portion of a
+process's memory that is held in RAM.  The rest of the memory exists in swap of the file system.  This is in
+general the most important memory concept to be aware of when dealing with memory constrained systems.
+
 Install
 -------
 
@@ -46,6 +50,8 @@ We have worker processes that run in containers.  I like to fail hard and early.
 that help us with that
 
 ``check_memory``
+^^^^^^^^^^^^^^^
+
     Will check the current rss memory against the memory_utils set memory limit.  And if it crosses that limit it will
     raise a ``MemoryToBigException``::
 
@@ -57,18 +63,51 @@ that help us with that
         memory_utils.check_memory()
 
 
+``memory_watcher``
+^^^^^^^^^^^^^^^^^^
+
+    Often you will want to do your ``check_memory`` at a _safe_ place.  Also memory leak often happen within a loop.
+    We created ``memory_watcher`` with those concepts in mind::
+
+            for account in memory_watcher(Account.objects):
+                account.do_something_memory_intensive()
+                account.save()
+
+    This will call ``check_memory`` before each iteration
 
 
 Configuration
 -------------
-
 ``set_verbose``
+    By default :func:`print_memory` will only print statements that move the memory
+        and :func:`memory_watcher` will not print its memory useage
+        If you want additional verbosity set this to true::
+
+            import memory_utils
+            memory_utils.set_verbose(True)
+
 ``set_memory_limit``
+    By default the memory limit at 200 MB
+
+    Use this method to change the default.
+
+    This setting is used in :func:`print_memory` and :func:`memory_watcher`
+
+    Note: for all methods that deal with this limit -- you can also override it at
+    the function level as well::
+
+        import memory_utils
+        memory_utils.set_memory_limit(500 * memory_utils.MEGABYTES)
+
 ``set_out``
 
+By default we will print to standard out.  Feel free to override here like so::
 
+        import memory_utils
+        from StringIO import StringIO
 
-
+        out = StringIO()
+        memory_utils.set_out(out)
 
 Questions / Issues
 ------------------

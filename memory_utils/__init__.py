@@ -165,8 +165,8 @@ def memory_watcher(it, limit=_MEMORY_LIMIT):
 
         Usage::
 
-            for account in memory_watcher(AdwordsAccount.objects):
-                account.aggregate_statuses()
+            for account in memory_watcher(Account.objects):
+                account.do_something_memory_intensive()
                 account.save()
 
         if logging is turned on -- you will get memory info printed out for each iteration
