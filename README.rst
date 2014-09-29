@@ -56,14 +56,14 @@ that help us with that
 ^^^^^^^^^^^^^^^
 
     Will check the current rss memory against the memory_utils set memory limit.  And if it crosses that limit it will
-    raise a ``MemoryToBigException``
+    raise a ``MemoryTooBigException``
 
 .. code:: python
 
     pip install memory_utils
 
     import memory_utils
-    memory_utils.set_memory_limit(200 * memory_utils.MEGABTYES)
+    memory_utils.set_memory_limit(200 * memory_utils.MEGABYTES)
 
     # .... else where
 

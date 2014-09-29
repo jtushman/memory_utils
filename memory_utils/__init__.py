@@ -17,16 +17,16 @@ from six.moves import range
 from colorama import Fore, Style
 
 KILOBYTE = KILOBYTES = 1024
-MEGABTYES = MEGABTYE = 1024 * KILOBYTES
-GIGABTYES = GIGABYTE = 1024 * MEGABTYES
-TERABYTES = TERABYTE = 1024 * GIGABTYES
-PETABYTES = PETABYTE = 1024 * TERABYTES
+MEGABYTE = MEGABYTES = 1024 * KILOBYTES
+GIGABYTE = GIGABYTES = 1024 * MEGABYTES
+TERABYTE = TERABYTES = 1024 * GIGABYTES
+PETABYTE = PETABYTES = 1024 * TERABYTES
 
 
 # Note we treat this module like a singleton -- hence these following globals
 # There are helper methods to adjust these
 
-_MEMORY_LIMIT = 200 * MEGABTYES
+_MEMORY_LIMIT = 200 * MEGABYTES
 
 _OUT = sys.stdout
 
@@ -35,7 +35,7 @@ _previous_memory = None
 _verbose = False
 
 
-class MemoryToBigException(Exception):
+class MemoryTooBigException(Exception):
 
     """ The system crosses a set memory limit
     """
@@ -160,7 +160,7 @@ def check_memory(limit=_MEMORY_LIMIT):
     current_rss = memory()
 
     if current_rss > limit:
-        raise MemoryToBigException("{} > {} @ {}".format(sizeof_fmt(current_rss), sizeof_fmt(limit)))
+        raise MemoryTooBigException("{} > {} @ {}".format(sizeof_fmt(current_rss), sizeof_fmt(limit)))
 
 
 def memory_watcher(it, limit=_MEMORY_LIMIT):
