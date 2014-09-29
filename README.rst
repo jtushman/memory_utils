@@ -58,16 +58,14 @@ that help us with that
     Will check the current rss memory against the memory_utils set memory limit.  And if it crosses that limit it will
     raise a ``MemoryToBigException``
 
-.. code:: python
-
-    pip install memory_utils
-
-    import memory_utils
-    memory_utils.set_memory_limit(200 * memory_utils.MEGABTYES)
-
-    # .... else where
-
-    memory_utils.check_memory()
+    .. code:: python
+    
+        import memory_utils
+        memory_utils.set_memory_limit(200 * memory_utils.MEGABTYES)
+    
+        # .... else where
+    
+        memory_utils.check_memory()
 
 
 ``memory_watcher``
@@ -75,10 +73,12 @@ that help us with that
 
     Often you will want to do your ``check_memory`` at a _safe_ place.  Also memory leak often happen within a loop.
     We created ``memory_watcher`` with those concepts in mind
+    
+    .. code:: python
 
-            for account in memory_watcher(Account.objects):
-                account.do_something_memory_intensive()
-                account.save()
+        for account in memory_watcher(Account.objects):
+            account.do_something_memory_intensive()
+            account.save()
 
     This will call ``check_memory`` before each iteration
 
@@ -88,11 +88,13 @@ Configuration
 ``set_verbose``
 ^^^^^^^^^^^^^^^
     By default ``print_memory`` will only print statements that move the memory
-        and ``memory_watcher`` will not print its memory useage
-        If you want additional verbosity set this to true::
+    and ``memory_watcher`` will not print its memory useage
+    If you want additional verbosity set this to true
+        
+    .. code:: python
 
-            import memory_utils
-            memory_utils.set_verbose(True)
+        import memory_utils
+        memory_utils.set_verbose(True)
 
 ``set_memory_limit``
 ^^^^^^^^^^^^^^^^^^^^
@@ -103,7 +105,9 @@ Configuration
     This setting is used in ``print_memory`` and ``memory_watcher``
 
     Note: for all methods that deal with this limit -- you can also override it at
-    the function level as well::
+    the function level as well
+    
+    .. code:: python
 
         import memory_utils
         memory_utils.set_memory_limit(500 * memory_utils.MEGABYTES)
@@ -111,13 +115,16 @@ Configuration
 ``set_out``
 ^^^^^^^^^^^
 
-    By default we will print to standard out.  Feel free to override here like so::
+    By default we will print to standard out.  Feel free to override here like so
+    
+    .. code:: python
 
         import memory_utils
         from StringIO import StringIO
 
         out = StringIO()
         memory_utils.set_out(out)
+
 
 Questions / Issues
 ------------------
