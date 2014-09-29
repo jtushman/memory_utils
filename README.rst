@@ -39,4 +39,4 @@ or add issues or PRs at https://github.com/jtushman/memory_utils
 .. _@tushman: http://twitter.com/tushman
 
 .. |Build Status| image:: https://travis-ci.org/jtushman/proxy_tools.svg?branch=master
-    :target: https://travis-ci.org/jtushman/proxy_tools
+    :target: https://travis-ci.org/jtushman/memory_tools
