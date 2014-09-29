@@ -1,13 +1,13 @@
 from setuptools import setup
 
-packages = ['memory_tools']
+packages = ['memory_utils']
 required_modules = [
     "colorama==0.3.2",
     "psutil==2.1.1"
 ]
 
 
-setup(name='memory_tools',
+setup(name='memory_utils',
       version='0.1.0',
       description='Tools to help with memory leaks',
       url='http://github.com/jtushman/memory_utils',
