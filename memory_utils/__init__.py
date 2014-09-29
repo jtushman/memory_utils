@@ -13,6 +13,7 @@ import os
 import sys
 import psutil
 from six import print_
+from six.moves import range
 from colorama import Fore, Style
 
 MEGABTYES = MEGABTYE = 1024 * 1024

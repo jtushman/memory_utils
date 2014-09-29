@@ -13,6 +13,7 @@ import nose
 from nose.tools import eq_
 import memory_utils
 from six import StringIO
+from six.moves import range
 
 def test_print_memory():
 
@@ -21,7 +22,7 @@ def test_print_memory():
 
     leak = []
     memory_utils.print_memory("BEFORE BLOAT")
-    for _ in xrange(100 * 100):
+    for _ in range(100 * 100):
         leak.append(LONGISH_STRING)
         memory_utils.print_memory("DURING BLOAT")
 
@@ -37,7 +38,7 @@ def test_memory_watch():
     memory_utils.set_verbose(True)
 
     leak = []
-    for _ in memory_utils.memory_watcher(xrange(100 * 100)):
+    for _ in memory_utils.memory_watcher(range(100 * 100)):
         leak.append(LONGISH_STRING)
 
     assert "4,096" in out.getvalue()
