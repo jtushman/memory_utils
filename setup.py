@@ -3,7 +3,8 @@ from setuptools import setup
 packages = ['memory_utils']
 required_modules = [
     "colorama==0.3.2",
-    "psutil==2.1.1"
+    "psutil==2.1.1",
+    "six==1.8.0"
 ]
 
 
