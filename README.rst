@@ -56,21 +56,25 @@ that help us with that
 ^^^^^^^^^^^^^^^
 
     Will check the current rss memory against the memory_utils set memory limit.  And if it crosses that limit it will
-    raise a ``MemoryToBigException``::
+    raise a ``MemoryToBigException``
 
-        import memory_utils
-        memory_utils.set_memory_limit(200 * memory_utils.MEGABTYES)
+.. code:: python
 
-        .... else where
+    pip install memory_utils
 
-        memory_utils.check_memory()
+    import memory_utils
+    memory_utils.set_memory_limit(200 * memory_utils.MEGABTYES)
+
+    # .... else where
+
+    memory_utils.check_memory()
 
 
 ``memory_watcher``
 ^^^^^^^^^^^^^^^^^^
 
     Often you will want to do your ``check_memory`` at a _safe_ place.  Also memory leak often happen within a loop.
-    We created ``memory_watcher`` with those concepts in mind::
+    We created ``memory_watcher`` with those concepts in mind
 
             for account in memory_watcher(Account.objects):
                 account.do_something_memory_intensive()
