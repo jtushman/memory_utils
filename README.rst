@@ -80,9 +80,9 @@ that help us with that
 
 
 Configuration
--------------
+~~~~~~~~~~~~~
 ``set_verbose``
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
     By default ``print_memory`` will only print statements that move the memory
         and ``memory_watcher`` will not print its memory useage
         If you want additional verbosity set this to true::
@@ -91,7 +91,7 @@ Configuration
             memory_utils.set_verbose(True)
 
 ``set_memory_limit``
-~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^
     By default the memory limit at 200 MB
 
     Use this method to change the default.
@@ -105,7 +105,7 @@ Configuration
         memory_utils.set_memory_limit(500 * memory_utils.MEGABYTES)
 
 ``set_out``
-~~~~~~~~~~~
+^^^^^^^^^^^
 
     By default we will print to standard out.  Feel free to override here like so::
 
