@@ -12,8 +12,7 @@ import sys
 import nose
 from nose.tools import eq_
 import memory_utils
-from StringIO import StringIO
-
+from six import StringIO
 
 def test_print_memory():
 
