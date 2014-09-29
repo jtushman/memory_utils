@@ -25,6 +25,9 @@ Install
     pip install memory_utils
 
 
+Usage
+-----
+
 print_memory
 ~~~~~~~~~~~~
 The workhorse of this package is ``print_memory`` It simply prints out 3 columns of data, the current memory, the delta
@@ -45,7 +48,7 @@ look like this::
 
 
 memory_watcher and check_memory
-~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 We have worker processes that run in containers.  I like to fail hard and early.  So we have two helper functions
 that help us with that
 
@@ -79,7 +82,7 @@ that help us with that
 Configuration
 -------------
 ``set_verbose``
-^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~
     By default ``print_memory`` will only print statements that move the memory
         and ``memory_watcher`` will not print its memory useage
         If you want additional verbosity set this to true::
@@ -88,7 +91,7 @@ Configuration
             memory_utils.set_verbose(True)
 
 ``set_memory_limit``
-^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~
     By default the memory limit at 200 MB
 
     Use this method to change the default.
@@ -102,9 +105,9 @@ Configuration
         memory_utils.set_memory_limit(500 * memory_utils.MEGABYTES)
 
 ``set_out``
-^^^^^^^^^^^
+~~~~~~~~~~~
 
-By default we will print to standard out.  Feel free to override here like so::
+    By default we will print to standard out.  Feel free to override here like so::
 
         import memory_utils
         from StringIO import StringIO
