@@ -9,7 +9,7 @@ required_modules = [
 
 
 setup(name='memory_utils',
-      version='0.1.0',
+      version='0.1.1',
       description='Tools to help with memory leaks',
       url='http://github.com/jtushman/memory_utils',
       author='Jonathan Tushman',
