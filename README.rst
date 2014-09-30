@@ -6,7 +6,7 @@ memory_utils
 Yeah Memory Issues!!
 
 
-"Memory Issues" happens to the best of us.  ``memory_utils`` will give you simple tools to quickly issolate "The" 
+Memory Issues happen to the best of us.  ``memory_utils`` will give you simple tools to quickly isolate the
 cuplrit, and ideally, warn you before you run into issues.
 
 From my experience, there is no silver-bullet in dealing with memory issues.  You just have to roll up your sleeve and get
