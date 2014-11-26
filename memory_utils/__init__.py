@@ -160,7 +160,7 @@ def check_memory(limit=_MEMORY_LIMIT):
     current_rss = memory()
 
     if current_rss > limit:
-        raise MemoryTooBigException("{} > {} @ {}".format(sizeof_fmt(current_rss), sizeof_fmt(limit)))
+        raise MemoryTooBigException("{} > {}".format(sizeof_fmt(current_rss), sizeof_fmt(limit)))
 
 
 def memory_watcher(it, limit=_MEMORY_LIMIT):
