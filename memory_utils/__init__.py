@@ -11,6 +11,7 @@
 
 import os
 import sys
+
 import psutil
 from six import print_
 from six.moves import range
@@ -36,7 +37,6 @@ _verbose = False
 
 
 class MemoryTooBigException(Exception):
-
     """ The system crosses a set memory limit
     """
     pass
@@ -51,7 +51,6 @@ def memory():
         We care primarily about rss -- for once you bypass that -- bad things start to happen
 
         returns int (rss in btyes)
-
     """
     p = psutil.Process(os.getpid())
     memory_info = p.get_memory_info()
@@ -69,18 +68,13 @@ def sizeof_fmt(num):
     """
     if num == 0:
         return '0'
-    if num < 0:
-        negative = True
-    else:
-        negative = False
+    fmt = "-%3.1f %s" if num < 0 else "%3.1f %s"
+    num = abs(num)
 
     for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
-        if abs(num) < 1024.0:
-            if negative:
-                return "-%3.1f %s" % (num, x)
-            else:
-                return "%3.1f %s" % (num, x)
-        num = abs(num) / 1024.0
+        if num < 1024.0:
+            return fmt % (num, x)
+        num /= 1024.0
 
 
 def print_memory(message=''):
@@ -123,7 +117,7 @@ def set_memory_limit(new_memory_limit):
     _MEMORY_LIMIT = new_memory_limit
 
 
-def set_verbose(bool):
+def set_verbose(bool_val):
     """ By default :func:`print_memory` will only print statements that move the memory
         and :func:`memory_watcher` will not print its memory useage
         If you want additional verbosity set this to true::
@@ -132,7 +126,7 @@ def set_verbose(bool):
             memory_utils.set_verbose(True)
     """
     global _verbose
-    _verbose = bool
+    _verbose = bool_val
 
 
 def set_out(io_stream):
@@ -143,7 +137,6 @@ def set_out(io_stream):
 
         out = StringIO()
         memory_utils.set_out(out)
-
     """
     global _OUT
     _OUT = io_stream
@@ -177,16 +170,8 @@ def memory_watcher(it, limit=_MEMORY_LIMIT):
 
         if memory crosses limit -- it will raise a :class:`MemoryToBigException`
     """
-    counter = 0
-    for value in it:
-        counter += 1
+    for counter, value in enumerate(it, start=1):
         if _verbose:
             print_memory("[{}] {}".format(counter, value))
         check_memory(limit)
         yield value
-
-
-
-
-
-
