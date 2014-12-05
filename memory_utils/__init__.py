@@ -153,17 +153,20 @@ def echo(string):
     print_(string, file=_OUT)
 
 
-def check_memory(limit=_MEMORY_LIMIT):
+def check_memory(limit=None):
     """ Check the current process memory against a set limit
         if greater then limit then raise :class:`MemoryToBigException`
     """
+    if limit is None:
+        limit = _MEMORY_LIMIT
+
     current_rss = memory()
 
     if current_rss > limit:
         raise MemoryTooBigException("{} > {}".format(sizeof_fmt(current_rss), sizeof_fmt(limit)))
 
 
-def memory_watcher(it, limit=_MEMORY_LIMIT):
+def memory_watcher(it, limit=None):
     """ Use this to wrap loops that you are concerned that might have memory issues
         In general this should be a concern in scheduled or background jobs
 
@@ -177,6 +180,10 @@ def memory_watcher(it, limit=_MEMORY_LIMIT):
 
         if memory crosses limit -- it will raise a :class:`MemoryToBigException`
     """
+
+    if limit is None:
+        limit = _MEMORY_LIMIT
+
     counter = 0
     for value in it:
         counter += 1
