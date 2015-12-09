@@ -54,7 +54,7 @@ def memory():
 
     """
     p = psutil.Process(os.getpid())
-    memory_info = p.get_memory_info()
+    memory_info = p.memory_info()
     return memory_info.rss
 
 
@@ -191,9 +191,3 @@ def memory_watcher(it, limit=None):
             print_memory("[{}] {}".format(counter, value))
         check_memory(limit)
         yield value
-
-
-
-
-
-
