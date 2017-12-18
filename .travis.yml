@@ -3,6 +3,6 @@ language: python
 python:
   - "2.7"
   - "3.6"
-init: "make"
+install: "make"
 script:
   - make test
