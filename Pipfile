@@ -9,6 +9,7 @@ name = "pypi"
 
 nose = "*"
 tox = "*"
+wheel = "*"
 
 
 [packages]
