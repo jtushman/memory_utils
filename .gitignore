@@ -40,3 +40,4 @@ Flask_Classy.egg-info/*
 docs/_build/html/Archive.zip
 docs/_build
 
+/.eggs/

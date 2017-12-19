@@ -1,4 +1,0 @@
-six
-nose
-psutil==2.1.1
-colorama==0.3.2

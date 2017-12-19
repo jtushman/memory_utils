@@ -15,10 +15,12 @@ import memory_utils
 from six import StringIO
 from six.moves import range
 
+
 def test_print_memory():
 
     out = StringIO()
     memory_utils.set_out(out)
+    memory_utils.set_verbose(True)
 
     leak = []
     memory_utils.print_memory("BEFORE BLOAT")
@@ -28,7 +30,17 @@ def test_print_memory():
 
     memory_utils.print_memory("AFTER BLOAT")
 
-    assert "4,096" in out.getvalue()
+    memory_strings = []
+    for n in range(100):
+        memory_strings.append(format(n * 4096, ",d"))
+
+    contains_memory = False
+    for mem_string in memory_strings:
+        if mem_string in out.getvalue():
+            contains_memory = True
+            break
+
+    assert contains_memory, "Expected output to contain memory leakage numbers: {}".format(out.getvalue())
 
 
 def test_memory_watch():
@@ -41,7 +53,17 @@ def test_memory_watch():
     for _ in memory_utils.memory_watcher(range(100 * 100)):
         leak.append(LONGISH_STRING)
 
-    assert "4,096" in out.getvalue()
+    memory_strings = []
+    for n in range(100):
+        memory_strings.append(format(n * 4096, ",d"))
+
+    contains_memory = False
+    for mem_string in memory_strings:
+        if mem_string in out.getvalue():
+            contains_memory = True
+            break
+
+    assert contains_memory, "Expected output to contain memory leakage numbers: {}".format(out.getvalue())
 
 
 

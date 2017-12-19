@@ -123,7 +123,7 @@ def set_memory_limit(new_memory_limit):
     _MEMORY_LIMIT = new_memory_limit
 
 
-def set_verbose(bool):
+def set_verbose(boolean):
     """ By default :func:`print_memory` will only print statements that move the memory
         and :func:`memory_watcher` will not print its memory useage
         If you want additional verbosity set this to true::
@@ -132,7 +132,7 @@ def set_verbose(bool):
             memory_utils.set_verbose(True)
     """
     global _verbose
-    _verbose = bool
+    _verbose = boolean
 
 
 def set_out(io_stream):
