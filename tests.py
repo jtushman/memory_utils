@@ -15,6 +15,7 @@ import memory_utils
 from six import StringIO
 from six.moves import range
 
+
 def test_print_memory():
 
     out = StringIO()
@@ -28,7 +29,7 @@ def test_print_memory():
 
     memory_utils.print_memory("AFTER BLOAT")
 
-    assert "4,096" in out.getvalue()
+    assert "4,096" in out.getvalue() or "8,192" in out.getvalue()
 
 
 def test_memory_watch():
