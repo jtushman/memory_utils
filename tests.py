@@ -23,7 +23,7 @@ def test_print_memory():
 
     leak = []
     memory_utils.print_memory("BEFORE BLOAT")
-    for _ in range(100 * 100):
+    for _ in range(1 * 1000):
         leak.append(LONGISH_STRING)
         memory_utils.print_memory("DURING BLOAT")
 
@@ -52,6 +52,11 @@ def test_memory_watch():
     leak = []
     for _ in memory_utils.memory_watcher(range(100 * 100)):
         leak.append(LONGISH_STRING)
+
+    print("Testing output")
+    print()
+    print(out.getvalue())
+    print()
 
     assert "4,096" in out.getvalue()
 
