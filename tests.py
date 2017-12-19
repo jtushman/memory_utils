@@ -20,10 +20,11 @@ def test_print_memory():
 
     out = StringIO()
     memory_utils.set_out(out)
+    memory_utils.set_verbose(True)
 
     leak = []
     memory_utils.print_memory("BEFORE BLOAT")
-    for _ in range(1 * 1000):
+    for _ in range(100 * 100):
         leak.append(LONGISH_STRING)
         memory_utils.print_memory("DURING BLOAT")
 
@@ -34,8 +35,12 @@ def test_print_memory():
     print(out.getvalue())
     print()
 
+    memory_strings = []
+    for n in range(100):
+        memory_strings.append(format(n * 4096, ",d"))
+
     contains_memory = False
-    for mem_string in ["4,096", "8,192", "12,288"]:
+    for mem_string in memory_strings:
         if mem_string in out.getvalue():
             contains_memory = True
             break
@@ -58,7 +63,17 @@ def test_memory_watch():
     print(out.getvalue())
     print()
 
-    assert "4,096" in out.getvalue()
+    memory_strings = []
+    for n in range(100):
+        memory_strings.append(format(n * 4096, ",d"))
+
+    contains_memory = False
+    for mem_string in memory_strings:
+        if mem_string in out.getvalue():
+            contains_memory = True
+            break
+
+    assert contains_memory
 
 
 
