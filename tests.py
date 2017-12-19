@@ -30,11 +30,6 @@ def test_print_memory():
 
     memory_utils.print_memory("AFTER BLOAT")
 
-    print("Testing output")
-    print()
-    print(out.getvalue())
-    print()
-
     memory_strings = []
     for n in range(100):
         memory_strings.append(format(n * 4096, ",d"))
@@ -45,7 +40,7 @@ def test_print_memory():
             contains_memory = True
             break
 
-    assert contains_memory
+    assert contains_memory, "Expected output to contain memory leakage numbers: {}".format(out.getvalue())
 
 
 def test_memory_watch():
@@ -58,11 +53,6 @@ def test_memory_watch():
     for _ in memory_utils.memory_watcher(range(100 * 100)):
         leak.append(LONGISH_STRING)
 
-    print("Testing output")
-    print()
-    print(out.getvalue())
-    print()
-
     memory_strings = []
     for n in range(100):
         memory_strings.append(format(n * 4096, ",d"))
@@ -73,7 +63,7 @@ def test_memory_watch():
             contains_memory = True
             break
 
-    assert contains_memory
+    assert contains_memory, "Expected output to contain memory leakage numbers: {}".format(out.getvalue())
 
 
 
