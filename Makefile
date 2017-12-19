@@ -3,4 +3,4 @@ init:
 	pipenv install --dev
 
 test:
-	pipenv run nosetests
+	pipenv run nosetests -s

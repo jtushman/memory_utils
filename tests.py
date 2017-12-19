@@ -29,7 +29,18 @@ def test_print_memory():
 
     memory_utils.print_memory("AFTER BLOAT")
 
-    assert "4,096" in out.getvalue() or "8,192" in out.getvalue()
+    print("Testing output")
+    print()
+    print(out.getvalue())
+    print()
+
+    contains_memory = False
+    for mem_string in ["4,096", "8,192", "12,288"]:
+        if mem_string in out.getvalue():
+            contains_memory = True
+            break
+
+    assert contains_memory
 
 
 def test_memory_watch():
